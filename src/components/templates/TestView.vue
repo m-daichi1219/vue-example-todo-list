@@ -20,6 +20,10 @@
     >
      <Icon type="remove"></Icon>
     </Button>
+
+    <router-link :to="{ name: 'taskDetailModalTest', params: { id } }">
+      {{ id }}
+    </router-link>
   </div>
 </template>
 
@@ -29,6 +33,12 @@ import Icon from '@/components/atoms/Icon.vue'
 
 export default {
   name: 'TestView',
+  props: {
+    id: {
+      type: Number,
+      default: 1
+    },
+  },
   components: {
     Button,
     Icon
