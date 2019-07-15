@@ -7,21 +7,24 @@
     </div>
     <div class="task-button">
       <Button
-        type="text"
+        type="remove"
         @click="$emit('remove', { id })"
       >
+        <Icon type="add"></Icon>
       </Button>
     </div>
   </div>
 </template>
 
 <script>
-import Button from '@/components/atom/Button.vue'
+import Button from '@/components/atoms/Button.vue'
+import Icon from '@/components/atoms/Icon.vue'
 
 export default {
   name: 'TaskCard',
   components: {
-    Button
+    Button,
+    Icon
   },
   props: {
     id: {

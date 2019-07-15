@@ -15,9 +15,9 @@ export default {
     props: {
       type: {
         type: String,
-        default: 'button',
+        default: 'add',
         validator (val) {
-          return ['button', 'text'].indexOf(val) !== -1
+          return ['add', 'remove'].indexOf(val) !== -1
         }
       },
       disabled: {
@@ -27,8 +27,8 @@ export default {
     },
     computed: {
       classes () {
-        const cls = this.type === 'text' ? ('-' + this.type) : ''
-        return [`button${cls}`]
+        const cls = this.type === 'remove' ? 'btn btn-outline-dark' : 'btn btn-primary'
+        return [`${cls}`]
       }
     },
     methods: {

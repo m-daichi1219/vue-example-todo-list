@@ -4,32 +4,65 @@ import Button from '@/components/atoms/Button.vue'
 
 describe('Button.vue', () => {
   describe('プロパティ', () => {
+    // describe('type', () => {
+    //   describe('デフォルト', () => {
+    //     it('buttonクラスを持つbutton要素で構成されること', () => {
+    //       const button = mount(Button)
+    //       expect(button.is('button')).to.equal(true)
+    //       expect(button.classes()).to.include('button')
+    //     })
+    //   })
+
+    //   describe('button', () => {
+    //     it('buttonクラスを持つbutton要素で構成されること', () => {
+    //       const button = mount(Button, {
+    //         propsData: { type: 'button' }
+    //       })
+    //       expect(button.is('button')).to.equal(true)
+    //       expect(button.classes()).to.include('button')
+    //     })
+    //   })
+
+    //   describe('text', () => {
+    //     it('button-textクラスを持つbutton要素で構成されること', () => {
+    //       const button = mount(Button, {
+    //         propsData: { type: 'text' }
+    //       })
+    //       expect(button.is('button')).to.equal(true)
+    //       expect(button.classes()).to.include('button-text')
+    //     })
+    //   })
+    // })
+
     describe('type', () => {
-      describe('デフォルト', () => {
-        it('buttonクラスを持つbutton要素で構成されること', () => {
+      describe('デフォルト', () =>{
+        it('btn btn-primaryクラスを持つbutton要素で構成されること', () => {
           const button = mount(Button)
+
           expect(button.is('button')).to.equal(true)
-          expect(button.classes()).to.include('button')
+          expect(button.classes()).to.include('btn', 'btn-primary')
         })
       })
 
-      describe('button', () => {
-        it('buttonクラスを持つbutton要素で構成されること', () => {
+      describe('add', () => {
+        it('btn btn-primaryクラスを持つbutton要素で構成されること', () => {
           const button = mount(Button, {
-            propsData: { type: 'button' }
+            propsData: { type: 'add' }
           })
+
           expect(button.is('button')).to.equal(true)
-          expect(button.classes()).to.include('button')
+          expect(button.classes()).to.include('btn', 'btn-primary')
         })
       })
 
-      describe('text', () => {
-        it('button-textクラスを持つbutton要素で構成されること', () => {
+      describe('remove', () => {
+        it('btn btn-outline-darkクラスを持つbutton要素で構成されること', () => {
           const button = mount(Button, {
-            propsData: { type: 'text' }
+            propsData: { type: 'remove' }
           })
+
           expect(button.is('button')).to.equal(true)
-          expect(button.classes()).to.include('button-text')
+          expect(button.classes()).to.include('btn', 'btn-outline-dark')
         })
       })
     })
@@ -57,15 +90,6 @@ describe('Button.vue', () => {
             propsData: { disabled: false }
           })
           expect(button.attributes().disabled).to.be.an('undefined')
-        })
-      })
-    })
-
-    describe('type', () => {
-      describe('デフォルト', () => {
-        it('button属性であること', () => {
-          const button = mount(Button)
-          expect(button.attributes().type).to.equal('button')
         })
       })
     })
