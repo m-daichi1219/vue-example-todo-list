@@ -1,18 +1,18 @@
 <template>
-  <div class="task-card">
-    <div class="task-name">
-      <router-link :to="{ name: 'taskDetailModal', params: { id } }">
-        {{ name }}
-      </router-link>
-    </div>
-    <div class="task-button">
+  <div class="card">
+    <div class="card-button">
       <Button
         type="remove"
         @click="$emit('remove', { id })"
       >
-        <Icon type="add"></Icon>
+        <Icon type="remove"></Icon>
       </Button>
     </div>
+    <div class="card-body">
+      <router-link :to="{ name: 'taskDetailModal', params: { id } }">
+        {{ name }}
+      </router-link>
+   </div>
   </div>
 </template>
 
@@ -39,3 +39,8 @@ export default {
 }
 </script>
 
+<style scoped>
+.card-button {
+  position: absolute; right:10px; top: 14px;
+}
+</style>

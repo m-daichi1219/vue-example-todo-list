@@ -1,35 +1,13 @@
 <template>
   <div>
     <p>テストページ</p>
-    <!-- Atomsのテスト -->
-    <Button
-      type="button"
-      @click="handleClick"
-    >
-    テスト
-    </Button>
-    <Button
-      type="text"
-      @click="handleClick"
-    >
-     <Icon type="add"></Icon>
-    </Button>
-    <Button
-      type="text"
-      @click="handleClick"
-    >
-     <Icon type="remove"></Icon>
-    </Button>
-
-    <router-link :to="{ name: 'taskDetailModalTest', params: { id } }">
-      {{ id }}
-    </router-link>
+    <TaskCard :id='id' name="task">
+    </TaskCard>
   </div>
 </template>
 
 <script>
-import Button from '@/components/atoms/Button.vue'
-import Icon from '@/components/atoms/Icon.vue'
+import TaskCard from '@/components/molecules/TaskCard.vue'
 
 export default {
   name: 'TestView',
@@ -40,8 +18,7 @@ export default {
     },
   },
   components: {
-    Button,
-    Icon
+    TaskCard
   },
   methods: {
     handleClick () {
