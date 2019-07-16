@@ -1,16 +1,134 @@
 <template>
   <form>
-    <label>タスク名</label>
-    <input
-      id="task-name"
-      type="text"
-      value="test"
+    <div>
+      <label>タスク名</label>
+      <input
+        id="name"
+        type="text"
+        v-model="task.name"
+      >
+    </div>
+    <div>
+      <label>タグ(半角スペース区切りで複数登録可)</label>
+      <input
+        id="tags"
+        type="text"
+        :value="tag"
+      >
+    </div>
+    <div>
+      <label>詳細</label>
+      <textarea
+        id="detail"
+        type="text"
+        v-model="task.detail"
+      >
+      </textarea>
+    </div>
+    <div>
+      <label>期限</label>
+      <input
+        id="limit"
+        type="datetime-local"
+        v-model="task.limit"
+      >
+    </div>
+    <Button
+      :type="mode"
+      @click="handleClick"
+      :disabled="!valid"
     >
+      {{ btnMessage }}
+    </Button>
   </form>
 </template>
 
 <script>
+import Button from '@/components/atoms/Button.vue'
+
 export default {
-  name: 'TaskDetailForm'
+  name: 'TaskDetailForm',
+  Components: {
+    Button
+  },
+  props: {
+    task: {
+      type: Object,
+      required: true,
+      default: () => {}
+    },
+    mode: {
+      type: String,
+      required: true,
+      validator: value => {
+        return ['update', 'add'].indexOf(value) !== -1
+      }
+    },
+    onclick: {
+      type: Function,
+      required: true
+    }
+  },
+  computed: {
+    tag () {
+      let ret = ''
+      if (!this.task.tags) { return ret }
+
+      this.task.tags.forEach((value) => {
+        ret += ' ' + value
+      })
+
+      return ret.trim()
+    },
+    valid () {
+      if(this.task.name && this.task.detail && this.task.limit){
+        return true
+      } else {
+        return false
+      }
+    },
+    btnMessage () {
+      return this.mode === 'update' ? '更新' : '追加'
+    }
+  },
+  data () {
+    return {
+      progress: false,
+      error: ''
+    }
+  },
+  methods: {
+    handleClick (ev) {
+      if (this.progress) { return }
+      this.progress = true
+
+      this.task.tags = this.tag.split(' ')
+
+      this.$nextTick(() => {
+        this.onclick(this.task)
+          .catch(err => {
+            this.error = err.message
+          })
+          .then(() => {
+            this.progress = false
+          })
+      })
+    }
+  }
 }
 </script>
+
+<style scoped>
+label {
+  display: block;
+}
+
+button {
+  margin: 1em;
+  float: right;
+}
+
+input, textarea {
+  width: 100%;
+}
+</style>

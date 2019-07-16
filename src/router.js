@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 import Home from './components/templates/TaskMainView.vue'
-import TaskModal from './components/molecules/TaskModal.vue'
+import TaskModal from './components/templates/TaskModal.vue'
 
 import TestView from './components/templates/TestView.vue'
 

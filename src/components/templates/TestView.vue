@@ -1,13 +1,13 @@
 <template>
   <div>
     <p>テストページ</p>
-    <TaskCard :id='id' name="task">
-    </TaskCard>
+    <DetailForm :task="task" mode="add" :onclick="onclick">
+    </DetailForm>
   </div>
 </template>
 
 <script>
-import TaskCard from '@/components/molecules/TaskCard.vue'
+import DetailForm from '@/components/molecules/TaskDetailForm.vue'
 
 export default {
   name: 'TestView',
@@ -17,8 +17,22 @@ export default {
       default: 1
     },
   },
+  data () {
+    return {
+      task: {
+        name: 'TaskName',
+        tags: ['tag1', 'tag2'],
+        detail: 'detail comment',
+        limit: '2019-12-31T12:59'
+      },
+      onclick() {
+        console.log("onclick")
+        return true
+      }
+    }
+  },
   components: {
-    TaskCard
+    DetailForm
   },
   methods: {
     handleClick () {
