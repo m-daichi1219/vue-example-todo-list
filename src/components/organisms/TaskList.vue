@@ -7,7 +7,9 @@
           v-for="task in tasks"
           :key="task.id"
         >
-          <TaskCard :task="task"
+          <TaskCard
+            :id="task.id"
+            :name="task.name"
             >
           </TaskCard>
         </li>

@@ -1,3 +1,3 @@
 <template>
-    <p>TaskMainView</p>
+  <p>TaskMainView</p>
 </template>
