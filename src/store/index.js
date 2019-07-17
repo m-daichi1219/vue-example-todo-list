@@ -8,10 +8,7 @@ Vue.use(Vuex)
 
 // 保持するデータ例
 const state = {
-  data: {
-    token: localStorage.getItem('token'), // `token`は locale storage から取得する
-    userId: null // `userId`はnullで初期化
-  }
+  tasks: []
 }
 
 export default new Vuex.Store({
