@@ -1,13 +1,13 @@
 <template>
   <div>
     <p>テストページ</p>
-    <DetailForm :task="task" mode="add" :onclick="onclick">
-    </DetailForm>
+    <TaskMainForm>
+    </TaskMainForm>
   </div>
 </template>
 
 <script>
-import DetailForm from '@/components/molecules/TaskDetailForm.vue'
+import TaskMainForm from '@/components/templates/TaskMainView.vue'
 
 export default {
   name: 'TestView',
@@ -32,7 +32,7 @@ export default {
     }
   },
   components: {
-    DetailForm
+    TaskMainForm
   },
   methods: {
     handleClick () {
