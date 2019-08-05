@@ -1,6 +1,7 @@
 export default {
   fetchTasks: (state) => (terms) => {
     let tasks = []
+
     const items = state.tasks.sort((a, b) => {
       if (!terms.isNear) return 0
       if (a.limit > b.limit) return 1

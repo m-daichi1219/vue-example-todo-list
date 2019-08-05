@@ -1,5 +1,6 @@
 import { expect } from 'chai'
 import getters from '@/store/getters'
+import { cloneDeep } from 'lodash'
 
 const tasks = [
   {
@@ -33,19 +34,26 @@ describe('getters.js', () => {
   describe('fetchTasks', () => {
     describe('条件が指定されていない場合', () => {
       beforeEach(() => {
+        const stateMock = cloneDeep(state)
         terms = { isNear: false, tag: '' }
-        actual = getters.fetchTasks(state)(terms)
+        actual = getters.fetchTasks(stateMock)(terms)
       })
+
       it('stateと同じ状態で取り出されること', () => {
-        expect(actual).to.equal(tasks)
+        expect(actual.length).to.equal(3)
+        expect(actual[0].id).to.equal(1)
+        expect(actual[1].id).to.equal(2)
+        expect(actual[2].id).to.equal(3)
       })
     })
 
     describe('近い順指定の場合', () => {
       beforeEach(() => {
+        const stateMock = cloneDeep(state)
         terms = { isNear: true, tag: '' }
-        actual = getters.fetchTasks(state)(terms)
+        actual = getters.fetchTasks(stateMock)(terms)
       })
+
       it('ソートされた状態で取り出されること', () => {
         expect(actual.length).to.equal(3)
         expect(actual[0].id).to.equal(2)
@@ -56,39 +64,40 @@ describe('getters.js', () => {
 
     describe('タグ指定の場合', () => {
       beforeEach(() => {
+        const stateMock = cloneDeep(state)
         terms = { isNear: false, tag: 'tag2' }
-        actual = getters.fetchTasks(state)(terms)
+        actual = getters.fetchTasks(stateMock)(terms)
       })
+
       it('タグ指定された情報のみ取り出されること', () => {
-        console.log('■■■■■■■■■■')
-        console.log(actual)
-        console.log('■■■■■■■■■■')
         expect(actual.length).to.equal(2)
         expect(actual[0].id).to.equal(1)
         expect(actual[1].id).to.equal(2)
       })
     })
-    
-    it('近い順かつタグ指定の場合', () => {
-      terms = { isNear: true, tag: 'tag2' }
-      actual = getters.fetchTasks(state)(terms)
 
-      console.log('■■■■■■■■■■')
-      console.log(actual)
-      console.log('■■■■■■■■■■')
-      expect(actual.length).to.equal(2)
-      expect(actual[0].id).to.equal(2)
-      expect(actual[1].id).to.equal(1)
+    describe('近い順かつタグ指定の場合', () => {
+      beforeEach(() => {
+        const stateMock = cloneDeep(state)
+        terms = { isNear: true, tag: 'tag2' }
+        actual = getters.fetchTasks(stateMock)(terms)
+      })
+
+      it('指定されたタグの情報がソートされて取り出されること', () => {
+        expect(actual.length).to.equal(2)
+        expect(actual[0].id).to.equal(2)
+        expect(actual[1].id).to.equal(1)
+      })
     })
   })
 
   describe('fetchTagList', () => {
-    it('タグの配列を返却すること', () => {
-      actual = getters.fetchTagList(state)
+    beforeEach(() => {
+      const stateMock = cloneDeep(state)
+      actual = getters.fetchTagList(stateMock)
+    })
 
-      console.log('■■■■■■■■■■')
-      console.log(actual)
-      console.log('■■■■■■■■■■')
+    it('タグの配列を返却すること', () => {
       expect(actual).to.eql(['tag1', 'tag2', 'tag3', 'tag4'])
     })
   })
