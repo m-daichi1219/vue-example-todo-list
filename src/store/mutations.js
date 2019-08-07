@@ -2,19 +2,28 @@ import * as types from './mutation-types'
 
 export default {
   [types.FETCH_ALL_TASKLIST] (state, payload) {
-    // TODO:
-    throw new Error('should be implemented')
+    state.tasks = payload
   },
   [types.ADD_TASK] (state, payload) {
-    // TODO:
-    throw new Error('should be implemented')
+    payload.id = state.tasks.length + 1
+    state.tasks.push(payload)
   },
   [types.UPDATE_TASK] (state, payload) {
-    // TODO:
-    throw new Error('should be implemented')
+    state.tasks.forEach((task, idx) => {
+      if (task.id === payload.id) {
+        state.tasks[idx] = payload
+      }
+    })
   },
   [types.REMOVE_TASK] (state, payload) {
-    // TODO:
-    throw new Error('should be implemented')
+    state.tasks.forEach((task, idx) => {
+      if (task.id === payload) {
+        state.tasks.splice(idx, 1)
+      }
+    })
+
+    state.tasks.forEach((task, idx) => {
+      task.id = idx + 1
+    })
   }
 }
