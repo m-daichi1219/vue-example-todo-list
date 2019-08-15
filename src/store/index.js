@@ -6,7 +6,7 @@ import mutations from './mutations'
 
 Vue.use(Vuex)
 
-// 保持するデータ例
+// 保持するデータ
 const state = {
   tasks: []
 }

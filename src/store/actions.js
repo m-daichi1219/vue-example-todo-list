@@ -1,21 +1,21 @@
 import * as types from './mutation-types'
-import { List, Task } from '../api/task'
 
 export default {
   fetchLists: ({ commit }) => {
-    // TODO:
-    throw new Error('should be implemented')
+    let tasks = JSON.parse(localStorage.getItem('tasks'))
+    if (tasks) {
+      commit(types.FETCH_ALL_TASKLIST, tasks)
+    }
   },
-  addTask: ({ commit }) => {
-    // TODO:
-    throw new Error('should be implemented')
+  addTask: ({ commit }, { task }) => {
+    commit(types.ADD_TASK, task)
   },
-  updateTask: ({ commit }) => {
-    // TODO:
-    throw new Error('should be implemented')
+  updateTask: ({ commit }, { task }) => {
+    commit(types.UPDATE_TASK, task)
   },
-  removeTask: ({ commit }) => {
-    // TODO:
-    throw new Error('should be implemented')
+  removeTask: ({ commit }, { taskId }) => {
+    if (taskId && !isNaN(Number(taskId))) {
+      commit(types.REMOVE_TASK, taskId)
+    }
   }
 }
