@@ -27,9 +27,13 @@
     "@vue/eslint-config-standard": "^4.0.0",
     "@vue/test-utils": "1.0.0-beta.29",
     "babel-eslint": "^10.0.1",
+    "babel-register": "^6.26.0",
     "chai": "^4.1.2",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.2.3",
+    "jest-localstorage-mock": "^2.4.0",
+    "mocha": "^6.2.0",
+    "mock-local-storage": "^1.1.8",
     "vue-template-compiler": "^2.6.10"
   },
   "eslintConfig": {
