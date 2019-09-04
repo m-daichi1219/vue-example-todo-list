@@ -1,38 +1,50 @@
 <template>
   <div>
-    <label>期限の近い順に並べる</label>
-    <input
-      type="checkbox"
-      id="isNear"
-      v-model="isNear"
-    >
-    <label>タグを指定</label>
-    <select name="taglist">
-      <option
-        v-for="(tag, index) in tagList"
-        :key="index"
-        :id="index"
-      >
-        {{tag}}
-      </option>
-    </select>
-    <Button
-      type="add"
-    >
-    アイテムの追加
-    </Button>
-    <p>TaskMainView</p>
-      <div v-if="tasks">
-        <TaskList 
-          :tasks="tasks"
-        >
-        </TaskList>
+    <h2 id="title">TODOリスト</h2>
+    <div class="container">
+      <div class="row">
+        <div class="col-auto">
+          <label>期限の近い順に並べる</label>
+          <input
+            type="checkbox"
+            id="isNear"
+            v-model="isNear"
+          >
+        </div>
+        <div class="col-auto">
+          <label>タグを指定</label>
+          <select name="taglist">
+            <option
+              v-for="(tag, index) in tagList"
+              :key="index"
+              :id="index"
+            >
+              {{tag}}
+            </option>
+          </select>
+        </div>
+        <div class="col-auto">
+          <router-link :to="{ name: 'taskDetailModal'}">
+            <Button
+              type="add"
+            >
+              アイテムの追加
+            </Button>
+          </router-link>
+        </div>
+        <!-- タスク詳細モーダル表示用プレースホルダ -->
+        <router-view />
       </div>
+    </div>
+    <TaskList 
+      :tasks="taskList"
+    >
+    </TaskList>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, Store } from 'vuex'
 import Button from '@/components/atoms/Button.vue'
 import TaskList from '@/components/organisms/TaskList.vue'
 
@@ -52,7 +64,15 @@ export default {
     ...mapGetters({
       tasks: 'fetchTasks',
       tagList: 'fetchTagList'
-    })
+    }),
+    // taskList () {
+    //   return this.tasks({isNear: this.isNear, tag: this.selectedTag})
+    // }
+  },
+  methods: {
+    taskList() {
+      return this.tasks({isNear: this.isNear, tag: this.selectedTag})
+    }
   }
 }
 </script>

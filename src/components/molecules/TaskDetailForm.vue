@@ -1,6 +1,6 @@
 <template>
   <form>
-    <div>
+    <div class="item">
       <label>タスク名</label>
       <input
         id="name"
@@ -8,7 +8,7 @@
         v-model="task.name"
       >
     </div>
-    <div>
+    <div class="item">
       <label>タグ(半角スペース区切りで複数登録可)</label>
       <input
         id="tags"
@@ -16,7 +16,7 @@
         :value="tag"
       >
     </div>
-    <div>
+    <div class="item">
       <label>詳細</label>
       <textarea
         id="detail"
@@ -25,7 +25,7 @@
       >
       </textarea>
     </div>
-    <div>
+    <div class="item">
       <label>期限</label>
       <input
         id="limit"
@@ -119,16 +119,22 @@ export default {
 </script>
 
 <style scoped>
-label {
+.label {
   display: block;
 }
 
-button {
+.button {
   margin: 1em;
   float: right;
 }
 
-input, textarea {
+.input, textarea {
   width: 100%;
+}
+
+.item {
+  display: block;
+  overflow: hidden;
+  margin-bottom: 10px;
 }
 </style>
