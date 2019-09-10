@@ -29,5 +29,8 @@ export default {
     return list.filter((el, idx, self) => {
       return self.indexOf(el) === idx
     })
+  },
+  getTaskById: state => id => {
+    return state.tasks.find(task => task.id === id)
   }
 }

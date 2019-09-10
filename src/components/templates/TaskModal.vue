@@ -14,8 +14,9 @@
         </div>
         <div class="body">
           <TaskDetailForm
-            :task="[]"
-            :mode="'add'"
+            :task="task"
+            :mode="mode"
+            :onclick="handleClick"
           >
           </TaskDetailForm>
         </div>
@@ -34,13 +35,49 @@ export default {
     Button,
     TaskDetailForm
   },
+  data () {
+    return {
+      handleClick: this.updateTask
+    }
+  },
+  computed: {
+    task () {
+      const id = parseInt(this.$route.params.id)
+      return !Number.isNaN(id)
+      ? {...this.$store.getters.getTaskById(id)}
+      : {}
+    },
+    mode () {
+      return this.task.name
+      ? "update"
+      : "add"
+    },
+    funcSelecter () {
+      if ( this.mode === "add" ) {
+        this.handleClick = this.addTask
+      } else {
+        this.handleClick = this.updateTask
+      }
+    }
+  },
   methods: {
     back () {
       this.$router.push({ path: '/' })
     },
     handleClose () {
       this.back()
-    }
+    },
+    addTask () {
+      console.log("addTask")
+    },
+    updateTask() {
+      console.log("updateTask")
+    },
+    // handleClick () {
+    //   return this.mode === "add"
+    //   ? this.addTask()
+    //   : this.updateTask()
+    // }
   }
 }
 </script>

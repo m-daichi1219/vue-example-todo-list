@@ -24,7 +24,7 @@
           </select>
         </div>
         <div class="col-auto">
-          <router-link :to="{ name: 'taskDetailModal'}">
+          <router-link :to="{ name: 'taskDetailModal', params: { id: 'new' }}">
             <Button
               type="add"
             >
@@ -65,14 +65,16 @@ export default {
       tasks: 'fetchTasks',
       tagList: 'fetchTagList'
     }),
-    // taskList () {
-    //   return this.tasks({isNear: this.isNear, tag: this.selectedTag})
-    // }
+    taskList () {
+      const taskList = this.tasks({isNear: this.isNear, tag: this.selectedTag})
+      return ( taskList ?  taskList : [] )
+    }
   },
   methods: {
-    taskList() {
-      return this.tasks({isNear: this.isNear, tag: this.selectedTag})
-    }
+    // taskList() {
+    //   const tasks = this.tasks({isNear: this.isNear, tag: this.selectedTag})
+    //   return ( tasks ? [] : tasks )
+    // }
   }
 }
 </script>

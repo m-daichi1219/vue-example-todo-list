@@ -36,7 +36,7 @@
     <Button
       :type="mode"
       @click="handleClick"
-      :disabled="!valid"
+      :disabled="false"
     >
       {{ btnMessage }}
     </Button>
@@ -55,7 +55,6 @@ export default {
     task: {
       type: Object,
       required: true,
-      default: () => {}
     },
     mode: {
       type: String,
@@ -81,7 +80,9 @@ export default {
       return ret.trim()
     },
     valid () {
-      if(this.task.name && this.task.detail && this.task.limit){
+      // TOOD:
+      //  props(task)の変更時に再計算されていない
+      if(this.task.name && this.task.detail){
         return true
       } else {
         return false
@@ -91,28 +92,16 @@ export default {
       return this.mode === 'update' ? '更新' : '追加'
     }
   },
-  data () {
-    return {
-      progress: false,
-      error: ''
-    }
-  },
+  // data () {
+  //   return {
+  //     progress: false,
+  //     error: ''
+  //   }
+  // },
   methods: {
-    handleClick (ev) {
-      if (this.progress) { return }
-      this.progress = true
-
-      this.task.tags = this.tag.split(' ')
-
-      this.$nextTick(() => {
-        this.onclick(this.task)
-          .catch(err => {
-            this.error = err.message
-          })
-          .then(() => {
-            this.progress = false
-          })
-      })
+    handleClick () {
+      this.task.tags = document.getElementById("tags").value.split(' ')
+      this.onclick(this.task)
     }
   }
 }
