@@ -35,11 +35,6 @@ export default {
     Button,
     TaskDetailForm
   },
-  data () {
-    return {
-      handleClick: this.updateTask
-    }
-  },
   computed: {
     task () {
       const id = parseInt(this.$route.params.id)
@@ -52,13 +47,6 @@ export default {
       ? "update"
       : "add"
     },
-    funcSelecter () {
-      if ( this.mode === "add" ) {
-        this.handleClick = this.addTask
-      } else {
-        this.handleClick = this.updateTask
-      }
-    }
   },
   methods: {
     back () {
@@ -67,17 +55,25 @@ export default {
     handleClose () {
       this.back()
     },
-    addTask () {
-      console.log("addTask")
+    addTask (task) {
+      console.log(task)
+      this.handleClose
     },
-    updateTask() {
-      console.log("updateTask")
+    updateTask (task) {
+      console.log(task)
+      this.handleClose
     },
-    // handleClick () {
-    //   return this.mode === "add"
-    //   ? this.addTask()
-    //   : this.updateTask()
-    // }
+    handleClick (task) {
+      return this.mode === "update"
+      ? this.$store.dispatch('updateTask', { task })
+        .then(() => {
+          this.back()
+        })
+      : this.$store.dispatch('addTask', { task })
+        .then(() => {
+          this.back()
+        })
+    }
   }
 }
 </script>

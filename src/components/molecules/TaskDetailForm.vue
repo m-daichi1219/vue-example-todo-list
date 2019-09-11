@@ -92,15 +92,11 @@ export default {
       return this.mode === 'update' ? '更新' : '追加'
     }
   },
-  // data () {
-  //   return {
-  //     progress: false,
-  //     error: ''
-  //   }
-  // },
   methods: {
-    handleClick () {
+    handleClick (ev) {
       this.task.tags = document.getElementById("tags").value.split(' ')
+      this.task.limit = document.getElementById("limit").value
+
       this.onclick(this.task)
     }
   }
