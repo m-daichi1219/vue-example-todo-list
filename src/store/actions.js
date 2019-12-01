@@ -1,4 +1,5 @@
 import * as types from './mutation-types'
+import { List } from '../api'
 
 export default {
   fetchLists: ({ commit }) => {
@@ -17,5 +18,16 @@ export default {
     if (taskId && !isNaN(Number(taskId))) {
       commit(types.REMOVE_TASK, taskId)
     }
+  },
+  axtionTest: ({ commit }, data) => {
+    console.log('action:axtionTest')
+    console.log('process.env.VUE_APP_ENV:' + process.env.VUE_APP_ENV)
+    return List.callGet(data)
+      .then((ret) => {
+        console.log('return callGet')
+        console.log('res:' + ret)
+        commit('callGet', ret)
+      })
+      .catch(err => { throw err })
   }
 }

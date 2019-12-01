@@ -25,5 +25,8 @@ export default {
     state.tasks.forEach((task, idx) => {
       task.id = idx + 1
     })
+  },
+  callGet (state, payload) {
+    state.test = payload
   }
 }
